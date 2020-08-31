@@ -1,0 +1,86 @@
+<html>
+	<head>
+		<style>
+			*{
+				box-sizing: border-box;
+				margin: 0;
+				padding: 0;
+			}
+			
+			
+			body{
+				background-color: #B0C4DE;
+			}
+			
+			
+			h2.welcome{
+				margin: 20px 20px;
+			}
+			
+			.dashboard-container{
+				display: flex;
+				align-items: center;
+				justify-content: center;
+				min-height: 100vh;
+				transform: translateX(-10000px);
+				transition: transform 0.5s ease-in;
+			}
+			
+			.box{
+				width: 500px;
+				height: 200px;
+				text-align: center;
+				border-radius: 10px;
+				padding: 10px;
+				font-size: 35px;
+				margin-right: 25px;
+				background-color: #4169E1;
+				display: flex;
+				align-items: center;
+				justify-content: center;
+				cursor: pointer;
+				
+			}
+			
+			.card-link{
+				text-decoration: none;
+			}
+			
+			.card-link:hover{
+				color: gold;
+			}
+			
+			.show{
+				transform: translateX(0);
+			}
+			
+			
+			
+		</style>
+	</head>
+	<body>
+		<center>
+			<h2 class="welcome">Welcome to your dashboard</h2>
+		</center>
+		
+		<div class="dashboard-container">
+			<a class="card-link" href="{% url 'before_create' %}">
+				<div class="box">
+					Create a story/question
+				</div>
+			</a>
+			
+			<a class="card-link" href="{% url 'edit_delete' %}">
+				<div class="box">
+					View all/Edit/Delete a story
+				</div>
+			</a>
+		</div><!-- End of dashboard-container -->
+	</body>
+	
+	<script>
+		setTimeout(()=>{
+			document.querySelector(".dashboard-container").classList.toggle("show");
+		}, 300);
+	</script>
+</html>

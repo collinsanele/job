@@ -1,0 +1,152 @@
+
+<html>
+	<head>
+		<style>
+			input{
+				margin: 0 8px;
+				padding: 5px;
+				width: 200px;
+				border: 1px solid blue;
+			}
+			
+			input#title{
+				width: 400px;
+				height: 60px;
+				border: 2px solid blue;
+				padding: 5px;
+				margin-bottom: 10px;
+			}
+			
+			textarea{
+				width: 400px;
+				height: 150px;
+				border: 2px solid blue;
+				padding: 5px;
+				margin-bottom: 10px;
+			}
+			
+			.flex-container{
+				display: flex;
+				align-items: center;
+			}
+			
+			input[type='submit']{
+				background-color: royalblue;
+				padding: 5px;
+				cursor: pointer;
+				border-radius: 10px;
+				margin-top: 20px;
+				display: inline-block;
+			
+			}
+			
+			input[type='submit']:hover{
+				transform: scaleX(1.3);
+				color: gold;
+			}
+			
+			
+			
+		</style>
+	</head>
+	<body>
+		<form method="POST" name="Form" onsubmit="event.preventDefault(); validateForm();">
+			{% csrf_token %}
+			<label> Story Title </label>
+			<input value="{{question.story.story_title}}" id="title" name="title"/><br/>
+			
+			<label>Story</label>
+			<textarea id="story-body" name="story-body">{{question.story.story_text}}</textarea>
+	
+			<br/>
+			
+			
+			</br>
+			
+			<div class="flex-container">
+				<label>Question </label>
+				<textarea name="question">{{question.question_text}}</textarea>
+				<input name="q1" placeholder="Option A" type="text" value="{{question.option_a}}" />
+				<input name="q2" placeholder="Option B" type="text" value="{{question.option_b}}" />
+				<input name="q3" placeholder="Option C" type="text" value="{{question.option_c}}" />
+				<input name="q4" placeholder="Option D" type="text" value="{{question.option_d}}" />
+			</div>
+			<br>
+			
+			<center>
+				<input name="correct" placeholder="Correct Answer" type="text" value="{{question.correct_ans}}" />
+			</center>
+			
+			<center><input type="submit" value="CREATE EDIT" /></center>
+			
+		</form>
+		
+		
+		
+		
+		
+		<script type="text/javascript">
+			function validateForm(){
+				const a = document.forms["Form"]["title"].value;
+				const b = document.forms["Form"]["story-body"].value;
+				const c = document.forms["Form"]["question"].value;
+				const d = document.forms["Form"]["q1"].value;
+				const e = document.forms["Form"]["q2"].value;
+				const f = document.forms["Form"]["q3"].value;
+				const g = document.forms["Form"]["q4"].value;
+				const h = document.forms["Form"]["correct"].value;
+				
+				
+				
+				
+				
+				if(!a.trim()){
+					alert("Please fill the title")
+					return false
+				}
+				
+				
+				if(!b.trim()){
+					alert("Please fill the story body")
+					return false
+				}
+
+				if(!c.trim()){
+					alert("Please fill the question")
+					return false
+				}
+			
+			
+				if(!d.trim()){
+					alert("Please fill the options")
+					return false
+				}
+				
+				if(!e.trim()){
+					alert("Please fill the options")
+					return false
+				}
+				
+				if(!f.trim()){
+					alert("Please fill the options")
+					return false
+				}
+				
+				if(!g.trim()){
+					alert("Please fill the options")
+					return false
+				}
+				
+				if(!h.trim()){
+					alert("Please fill the correct answer")
+					return false
+				}
+				
+				document.forms['Form'].submit();
+			
+			
+		    }
+			
+		</script>
+	</body>
+</html>

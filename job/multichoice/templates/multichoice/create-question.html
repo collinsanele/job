@@ -1,0 +1,139 @@
+<html>
+	<head>
+		<style>
+			input{
+				margin: 0 8px;
+				padding: 5px;
+				width: 200px;
+				border: 1px solid blue;
+			}
+			
+			input#title{
+				width: 400px;
+				height: 60px;
+				border: 2px solid blue;
+				padding: 5px;
+				margin-bottom: 10px;
+			}
+			
+			textarea{
+				width: 400px;
+				height: 150px;
+				border: 2px solid blue;
+				padding: 5px;
+				margin-bottom: 10px;
+			}
+			
+			.flex-container{
+				display: flex;
+				align-items: center;
+			}
+			
+			input[type='submit']{
+				background-color: royalblue;
+				padding: 5px;
+				cursor: pointer;
+				border-radius: 10px;
+				margin-top: 20px;
+				display: inline-block;
+			
+			}
+			
+			input[type='submit']:hover{
+				transform: scaleX(1.3);
+				color: gold;
+			}
+			
+			
+			
+		</style>
+		
+	</head>
+	
+	<body>
+		<form method="POST" name="Form" onsubmit="event.preventDefault(); validateForm();">
+			{% csrf_token %}
+			<label>Story</label>
+			<select name="title" id="title">
+				{% for story in stories %}
+					<option value={{story.id}}>{{story.story_title}}</option>
+				{% endfor %}
+			</select>
+			<br/>
+			
+			
+			</br>
+			
+			<div class="flex-container">
+				<label>Question </label>
+				<textarea name="question"></textarea>
+				<input name="q1" placeholder="Option A" type="text"/>
+				<input name="q2" placeholder="Option B" type="text"/>
+				<input name="q3" placeholder="Option C" type="text"/>
+				<input name="q4" placeholder="Option D" type="text"/>
+			</div>
+			<br>
+			
+			<center>
+				<input name="correct" placeholder="Correct Answer" type="text"/>
+			</center>
+			
+			<center><input type="submit" value="CREATE" /></center>
+			
+		</form>
+		
+	
+
+
+
+
+	<script type="text/javascript">
+			function validateForm(){
+				const c = document.forms["Form"]["question"].value;
+				const d = document.forms["Form"]["q1"].value;
+				const e = document.forms["Form"]["q2"].value;
+				const f = document.forms["Form"]["q3"].value;
+				const g = document.forms["Form"]["q4"].value;
+				const h = document.forms["Form"]["correct"].value;
+				
+				
+
+				if(!c.trim()){
+					alert("Please fill the question")
+					return false
+				}
+			
+			
+				if(!d.trim()){
+					alert("Please fill the options")
+					return false
+				}
+				
+				if(!e.trim()){
+					alert("Please fill the options")
+					return false
+				}
+				
+				if(!f.trim()){
+					alert("Please fill the options")
+					return false
+				}
+				
+				if(!g.trim()){
+					alert("Please fill the options")
+					return false
+				}
+				
+				if(!h.trim()){
+					alert("Please fill the correct answer")
+					return false
+				}
+				
+				document.forms['Form'].submit();
+			
+			
+		    }
+			  
+	</script>
+	</body>
+</html>

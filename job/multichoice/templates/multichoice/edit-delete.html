@@ -1,0 +1,78 @@
+{% include "includes/alert.html" %}
+<html>
+	<head>
+		<style>
+			table {
+			  text-align: left;
+			  position: relative;
+			  
+			  width: 100%
+			}
+			
+			th, td {
+			  padding: 0.25rem;
+			}
+			tr.red th {
+			  background: blue;
+			  color: white;
+			}
+			
+			th {
+			  background: white;
+			  position: sticky;
+			  top: 0; /* Don't forget this, required for the stickiness */
+			  box-shadow: 0 2px 2px -1px rgba(0, 0, 0, 0.4);
+			}
+		</style>
+	</head>
+	<body>
+		<div>
+			<!-- Table Here -->
+			<table border="1" class="table table-dark">
+			  <thead>
+				<tr class="red">
+				  <th>Story</th>
+				  <th>Question</th>
+				  <th>Correct Answer</th>
+				  <th>Option A</th>
+				  <th>Option B</th>
+				  <th>Option C</th>
+				  <th>Option D</th>
+				  <th>Edit</th>
+				  <th>Delete</th>
+
+				</tr>
+			  </thead>
+			  <tbody>
+			  {% for story in stories %}
+				{% for question in story.question_set.all %}
+					<tr>
+					  
+					  <td>{{story.story_title}}</td>
+					  <td>{{question.question_text}}</td>
+					  <td>{{question.correct_ans}}</td>
+					  <td>{{question.option_a}}</td>
+					  <td>{{question.option_b}}</td>
+					  <td>{{question.option_c}}</td>
+					  <td>{{question.option_d}}</td>
+					  <td>
+						<a href="{% url 'edit' pk=question.id %}">Edit</a>
+						<input type="hidden" value={{story.id}}/>
+					  </td>
+					  <td>
+						<a href="{% url 'delete' pk=question.id %}">Delete</a>
+						<input type="hidden" value={{story.id}}/>
+					  </td>
+					</tr>
+				 {% endfor %}
+			   {% endfor %}
+					
+			  </tbody>
+			</table>
+			<br/><br/>
+			<center>
+				<a href="{% url 'dashboard' %}">Go to Dashboard</a>
+			</center>
+		</div>
+	</body>
+</html>

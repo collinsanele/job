@@ -1,0 +1,54 @@
+<html>
+	<head>
+		<style>
+			li{
+				font-size: 23px;
+				margin-bottom: 15px;
+				}
+			
+			
+			
+			#get-started{
+				width: 460px;
+				height:60px;
+				padding: 10px;
+				border-radius: 10px;
+				background-color: green;
+				text-decoration: none;
+				font-size: 20px;
+				transition: transform 0.3s;
+				color: black;
+			}
+			
+			#get-started:hover{
+				text-decoration: none;
+				transform: scaleX(1.2);
+				color: gold;
+			}
+			
+		</style>
+	</head>
+	<body>
+		<div>
+			<center>
+				<h1>Please Read The Following Instructions Carefully</h1>
+			</center>
+			<br/>
+			
+			<ol>
+				<li>You would presented with a story/article. Carefully read it and answer the following questions below</li>
+				<li>There are four (4) options (options A -D) per question </li>
+				<li>For each question, there is only one correct answer</li>
+				<li>Select <strong>ONLY ONE</strong> option from the options</li>
+				<li><strong>You would be disqualified if you select more than one options for a question</strong></li>
+				<li>You have 25 minutes for this test</li>
+				<li>GOOD LUCK</li>
+			</ol>
+			
+			
+			<center>
+				<a id="get-started" href="{% url 'start' %}"> Click here to start </a>
+			</center>
+		</div>
+	</body>
+</html>

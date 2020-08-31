@@ -1,0 +1,166 @@
+{% include "includes/alert.html" %}
+
+<html>
+<head>
+	<style>
+		*{
+			box-sizing: border-box;
+			padding: 0;
+			margin: 0;
+		}
+		
+		body{
+			background-color: #D3D3D3;
+		}
+		
+		
+		.heading{
+			margin-bottom: 12px;
+		}
+		
+		
+		.container{
+			padding: 10px;
+		}
+	
+	
+		.card{
+			width: 1100px;
+			min-height: 220px;
+			border: 1px solid black;
+			background-color: grey;
+			border-radius: 6px;
+			padding: 10px;
+			box-shadow: 5px 5px rgba(0,0,0,0.76);
+			margin: 0 auto;
+			margin-bottom: 30px;
+			color: white;
+		}
+		
+		.card p{
+			font-size: 24px;
+			line-height: 1.6rem;
+			margin-bottom: 16px;
+		}
+		
+		
+		.card span.answer{
+			font-size: 18px;
+		}
+		
+		.story h1{
+			color: black;
+			margin-bottom: 15px;
+		}
+		
+		
+		#submit{
+			padding: 8px;
+			width:350px;
+			height: 50px;
+			background-color: blue;
+			color: white;
+			border: none;
+			border-radius: 10px;
+			margin-bottom: 20px;
+			cursor: pointer;
+			transition: transform 0.4s;
+		}
+		
+		
+		#submit:hover{
+			transform: scaleX(1.2);
+			color: gold;
+		}
+		
+		
+	</style>
+</head>
+<body>
+	<br/>
+	<center>
+		<div>Time remaining <span id="time" style="color: blue;">25:00</span> minutes!</div>
+	</center>
+	<br/>
+	<form method="POST" class="container">
+		{% csrf_token %}
+		<div class="card story">
+			<center>
+				<h1> {{story.story_title}} </h1>
+			</center>
+			<p>
+				{{story.story_text}}
+			</p>
+		</div>
+		<center>
+			<h1 class="heading">Attempt all questions below</h1>
+		</center>
+		
+		{% if questions %}
+			{% for question in questions %}
+				<div class="card">
+					<p>
+						{{question.question_text}}
+					</p>
+					
+					
+					<span>A.</span>&nbsp;
+					<input type="checkbox" name="answer" value="{{question.option_a}}" />
+					<span class="answer">{{question.option_a}}</span>
+					<br/><br/>
+					
+					<span>B.</span>&nbsp;
+					<input type="checkbox" name="answer" value="{{question.option_b}}" />
+					<span class="answer">{{question.option_b}}</span>
+					<br/><br/>
+					
+					<span>C.</span>&nbsp;
+					<input type="checkbox" name="answer" value="{{question.option_c}}" />
+					<span class="answer">{{question.option_c}}</span>
+					</br><br/>
+					
+					<span>D.</span>&nbsp;
+					<input type="checkbox" name="answer" value="{{question.option_d}}" />
+					<span class="answer">{{question.option_d}}</span>
+					</br><br/>
+				</div>
+			{% endfor %}
+		{% endif %}
+		
+		<center>
+			<input id="submit" type="submit" value="SUBMIT" />
+		</center>
+		
+		
+	</form><!-- end of container -->
+	
+	
+	
+	<script>
+		function startTimer(duration, display) {
+			var timer = duration, minutes, seconds;
+			setInterval(function () {
+				minutes = parseInt(timer / 60, 10);
+				seconds = parseInt(timer % 60, 10);
+
+				minutes = minutes < 10 ? "0" + minutes : minutes;
+				seconds = seconds < 10 ? "0" + seconds : seconds;
+
+				display.textContent = minutes + ":" + seconds;
+
+				if (--timer < 0) {
+					timer = 60 * 0;
+					alert("Stop\nTime Up!");
+					return false
+				}
+			}, 1000);
+		}
+
+		window.onload = function () {
+			var twentyFiveMinutes = 60 * 25,
+				display = document.querySelector('#time');
+			startTimer(twentyFiveMinutes, display);
+		};
+	</script>
+</body>
+</html>
